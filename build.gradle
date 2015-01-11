@@ -14,6 +14,8 @@ mainClassName = 'trivia.GameRunner'
 defaultTasks 'idea', 'build'
 
 assemble.dependsOn 'distZip'
+check.dependsOn 'jacocoTestReport'
+tasks.jacocoTestReport.mustRunAfter 'test'
 
 repositories {
     mavenCentral()
