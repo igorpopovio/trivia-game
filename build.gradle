@@ -21,3 +21,10 @@ dependencies {
                 'org.assertj:assertj-core:1.7.0'
                 'org.mockito:mockito-all:1.10.17'
 }
+
+jar {
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	manifest {
+		attributes 'Main-Class': 'trivia.GameRunner'
+	}
+}
