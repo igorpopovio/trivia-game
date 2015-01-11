@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
     id 'idea'
     id 'jacoco'
     id 'sonar-runner'
@@ -8,8 +9,11 @@ plugins {
 
 group = 'trivia'
 version = 'alfa'
+mainClassName = 'trivia.GameRunner'
 
 defaultTasks 'idea', 'build'
+
+assemble.dependsOn 'distZip'
 
 repositories {
     mavenCentral()
@@ -25,6 +29,6 @@ dependencies {
 jar {
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 	manifest {
-		attributes 'Main-Class': 'trivia.GameRunner'
+		attributes 'Main-Class': mainClassName
 	}
 }
