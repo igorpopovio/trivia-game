@@ -165,4 +165,8 @@ public class Game {
     private boolean didPlayerWin() {
         return !(purses[currentPlayer] == 6);
     }
+
+    public int getCoinsForCurrentPlayer() {
+        return purses[currentPlayer];
+    }
 }
