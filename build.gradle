@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'idea'
+    id 'eclipse'
     id 'jacoco'
     id 'sonar-runner'
     id 'info.solidsoft.pitest' version '1.1.1'
