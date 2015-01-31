@@ -31,6 +31,12 @@ public class GameTests {
         assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
     }
 
+    @Test
+    public void canRollInvalidNumbers() throws Exception {
+        game.roll(-1);
+        game.roll(7);
+    }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void cannotPlayWhenThereAreNoPlayers() throws Exception {
         new Game().roll(1);
