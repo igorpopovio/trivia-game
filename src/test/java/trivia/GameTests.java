@@ -17,7 +17,7 @@ public class GameTests {
 
     @Test
     public void shouldWinCoinsWhenProvidingCorrectAnswer() throws Exception {
-        game.roll(0);
+        game.roll(1);
         game.wasCorrectlyAnswered();
 
         assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(1);
@@ -25,7 +25,7 @@ public class GameTests {
 
     @Test
     public void shouldNotWinCoinsWhenProvidingWrongAnswer() throws Exception {
-        game.roll(0);
+        game.roll(1);
         game.wrongAnswer();
 
         assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
