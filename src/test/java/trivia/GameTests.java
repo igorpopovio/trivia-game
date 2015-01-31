@@ -18,7 +18,8 @@ public class GameTests {
         game.add("Igor");
 
         game.roll(0);
+        game.wasCorrectlyAnswered();
 
-        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
+        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(1);
     }
 }
