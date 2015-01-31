@@ -13,7 +13,7 @@ public class GameTests {
     }
 
     @Test
-    public void shouldWinCoinsWhenAnsweringCorrectly() throws Exception {
+    public void shouldWinCoinsWhenProvidingCorrectAnswer() throws Exception {
         Game game = new Game();
         game.add("Igor");
 
@@ -24,7 +24,7 @@ public class GameTests {
     }
 
     @Test
-    public void shouldNotWinCoinsWhenAnsweringWrong() throws Exception {
+    public void shouldNotWinCoinsWhenProvidingWrongAnswer() throws Exception {
         Game game = new Game();
         game.add("Igor");
 
