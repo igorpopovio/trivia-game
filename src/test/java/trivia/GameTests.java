@@ -30,4 +30,9 @@ public class GameTests {
 
         assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
     }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void cannotPlayWhenThereAreNoPlayers() throws Exception {
+        new Game().roll(1);
+    }
 }
