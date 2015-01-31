@@ -22,4 +22,15 @@ public class GameTests {
 
         assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(1);
     }
+
+    @Test
+    public void shouldNotWinCoinsWhenAnsweringWrong() throws Exception {
+        Game game = new Game();
+        game.add("Igor");
+
+        game.roll(0);
+        game.wrongAnswer();
+
+        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
+    }
 }
