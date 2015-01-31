@@ -35,4 +35,19 @@ public class GameTests {
     public void cannotPlayWhenThereAreNoPlayers() throws Exception {
         new Game().roll(1);
     }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void cannotPlayWhenThereAreMoreThanFivePlayers() throws Exception {
+        addPlayersTo(new Game(), 6);
+    }
+
+    @Test
+    public void canPlayWhenThereAreAtMostFivePlayers() throws Exception {
+        addPlayersTo(new Game(), 5);
+    }
+
+    public void addPlayersTo(Game game, int howMany) {
+        for (int i = 1; i <= howMany; i++)
+            game.add("Player " + i);
+    }
 }
