@@ -30,4 +30,16 @@ public class HappyPathTests {
 
         assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
     }
+
+    @Test
+    public void shouldEndGameWhenPlayerProvidesSixCorrectAnswers() throws Exception {
+        giveCorrectAnswers(6);
+
+        assertThat(game.isOver()).isTrue();
+    }
+
+    private void giveCorrectAnswers(int howMany) {
+        for (int i = 1; i <= howMany; i++)
+            game.wasCorrectlyAnswered();
+    }
 }

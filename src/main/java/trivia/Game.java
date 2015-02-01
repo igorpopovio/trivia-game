@@ -166,6 +166,10 @@ public class Game {
         return !(purses[currentPlayer] == 6);
     }
 
+    public boolean isOver() {
+        return !didPlayerWin();
+    }
+
     public int getCoinsForCurrentPlayer() {
         return purses[currentPlayer];
     }
