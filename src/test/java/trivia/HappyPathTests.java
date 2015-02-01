@@ -38,6 +38,13 @@ public class HappyPathTests {
         assertThat(game.isOver()).isTrue();
     }
 
+    @Test
+    public void shouldContinueGameWhenPlayerProvidedOnlyFiveCorrectAnswers() throws Exception {
+        giveCorrectAnswers(5);
+
+        assertThat(game.isOver()).isFalse();
+    }
+
     private void giveCorrectAnswers(int howMany) {
         for (int i = 1; i <= howMany; i++)
             game.wasCorrectlyAnswered();
