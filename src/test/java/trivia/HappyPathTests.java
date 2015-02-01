@@ -71,6 +71,19 @@ public class HappyPathTests {
         assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
     }
 
+    @Test
+    public void shouldNotWinAnyCoinsWhenRemainingInPenaltyBoxEvenIfProvidingCorrectAnswer() throws Exception {
+        // move in penalty box by giving a wrong answer
+        game.roll(1);
+        game.wrongAnswer();
+
+        // make him stay in the penalty box (even roll + wrong answer)
+        game.roll(2);
+        game.wasCorrectlyAnswered();
+
+        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
+    }
+
     private void giveCorrectAnswers(int howMany) {
         for (int i = 1; i <= howMany; i++)
             game.wasCorrectlyAnswered();
