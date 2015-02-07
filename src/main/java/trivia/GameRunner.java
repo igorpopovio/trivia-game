@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class GameRunner {
     private static boolean notAWinner;
+    public static Random rand = new Random();
 
     public static void main(String[] args) {
         Game aGame = new Game();
@@ -12,7 +13,6 @@ public class GameRunner {
         aGame.add("Pat");
         aGame.add("Sue");
 
-        Random rand = new Random();
         do {
             aGame.roll(rand.nextInt(5) + 1);
             if (rand.nextInt(9) == 7) {
