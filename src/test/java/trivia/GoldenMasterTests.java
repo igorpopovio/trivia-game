@@ -1,6 +1,7 @@
 package trivia;
 
 import junitx.framework.FileAssert;
+import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -14,6 +15,7 @@ public class GoldenMasterTests {
     @Test
     @Ignore("Should be run only when generating the golden master")
     public void generateGoldenMaster() throws Exception {
+        FileUtils.cleanDirectory(new File("golden-master"));
         for (int seed = 0; seed < 100; seed++) {
             File goldenMasterOutput = new File(format("golden-master/seed-%d.txt", seed));
             System.setOut(new PrintStream(goldenMasterOutput));
@@ -28,6 +30,9 @@ public class GoldenMasterTests {
 
     @Test
     public void isCurrentOutputSameAsGoldenMaster() throws Exception {
+        File currentOutputDirectory = new File("current-output");
+        FileUtils.deleteDirectory(currentOutputDirectory);
+        currentOutputDirectory.mkdir();
         for (int seed = 0; seed < 100; seed++) {
             File currentOutput = new File(format("current-output/seed-%d.txt", seed));
             File goldenMasterOutput = new File(format("golden-master/seed-%d.txt", seed));
