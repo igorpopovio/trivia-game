@@ -24,11 +24,6 @@ public class ExceptionalTests {
         new Game().roll(1);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void cannotPlayWhenThereAreMoreThanFivePlayers() throws Exception {
-        addPlayersTo(new Game(), 6);
-    }
-
     @Test
     public void canPlayWhenThereAreAtMostFivePlayers() throws Exception {
         addPlayersTo(new Game(), 5);

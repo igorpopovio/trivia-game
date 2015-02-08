@@ -14,7 +14,7 @@ public class Game {
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
 
-    int currentPlayer = 0;
+    int currentPlayer;
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
@@ -28,17 +28,10 @@ public class Game {
 
     public boolean add(String playerName) {
         players.add(playerName);
-        places[howManyPlayers()] = 0;
-        purses[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
         return true;
-    }
-
-    public int howManyPlayers() {
-        return players.size();
     }
 
     public void roll(int roll) {
@@ -72,7 +65,6 @@ public class Game {
             System.out.println("The category is " + currentCategory());
             askQuestion();
         }
-
     }
 
     private void askQuestion() {
@@ -85,7 +77,6 @@ public class Game {
         if (currentCategory() == "Rock")
             System.out.println(rockQuestions.removeFirst());
     }
-
 
     private String currentCategory() {
         if (places[currentPlayer] == 0) return "Pop";
