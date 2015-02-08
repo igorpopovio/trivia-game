@@ -104,12 +104,8 @@ public class Game {
         inPenaltyBox[currentPlayer] = true;
     }
 
-    private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
-    }
-
     public boolean isOver() {
-        return !didPlayerWin();
+        return purses[currentPlayer] == 6;
     }
 
     public int getCoinsForCurrentPlayer() {
