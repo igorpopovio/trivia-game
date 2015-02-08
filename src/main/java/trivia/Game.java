@@ -92,24 +92,20 @@ public class Game {
                 log("Answer was correct!!!!");
                 purses[currentPlayer]++;
                 log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
-
                 winner = didPlayerWin();
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
             } else {
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
                 winner = true;
             }
         } else {
             log("Answer was correct!!!!");
             purses[currentPlayer]++;
             log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
-
             winner = didPlayerWin();
-            currentPlayer++;
-            if (currentPlayer == players.size()) currentPlayer = 0;
         }
+
+        currentPlayer++;
+        if (currentPlayer == players.size()) currentPlayer = 0;
+
         return winner;
     }
 
