@@ -40,15 +40,17 @@ public class Game {
 
         if (inPenaltyBox[currentPlayer]) {
             isGettingOutOfPenaltyBox = roll % 2 != 0;
-            if (isGettingOutOfPenaltyBox) {
+            if (isGettingOutOfPenaltyBox)
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-                play(roll);
-            } else {
+            else
                 System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-            }
-        } else {
-            play(roll);
         }
+
+        if (inPenaltyBox[currentPlayer]) {
+            if (isGettingOutOfPenaltyBox)
+                play(roll);
+        } else
+            play(roll);
     }
 
     public void play(int roll) {
