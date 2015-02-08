@@ -85,17 +85,12 @@ public class Game {
         return "Rock";
     }
 
-    public boolean wasCorrectlyAnswered() {
-        boolean winner = inPenaltyBox[currentPlayer] ? true : doIfAnswerIsCorrect();
-        advanceToNextPlayer();
-        return winner;
-    }
+    public void wasCorrectlyAnswered() {
+        if (inPenaltyBox[currentPlayer]) return;
 
-    public boolean doIfAnswerIsCorrect() {
         log("Answer was correct!!!!");
         purses[currentPlayer]++;
         log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
-        return didPlayerWin();
     }
 
     public void advanceToNextPlayer() {
@@ -103,13 +98,10 @@ public class Game {
         if (currentPlayer == players.size()) currentPlayer = 0;
     }
 
-    public boolean wrongAnswer() {
+    public void wrongAnswer() {
         log("Question was incorrectly answered");
         log("%s was sent to the penalty box", players.get(currentPlayer));
         inPenaltyBox[currentPlayer] = true;
-
-        advanceToNextPlayer();
-        return true;
     }
 
     private boolean didPlayerWin() {
