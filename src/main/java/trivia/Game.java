@@ -86,33 +86,31 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
+        boolean winner;
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
                 log("Answer was correct!!!!");
                 purses[currentPlayer]++;
                 log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
 
-                boolean winner = didPlayerWin();
+                winner = didPlayerWin();
                 currentPlayer++;
                 if (currentPlayer == players.size()) currentPlayer = 0;
-
-                return winner;
             } else {
                 currentPlayer++;
                 if (currentPlayer == players.size()) currentPlayer = 0;
-                return true;
+                winner = true;
             }
         } else {
             log("Answer was corrent!!!!");
             purses[currentPlayer]++;
             log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
 
-            boolean winner = didPlayerWin();
+            winner = didPlayerWin();
             currentPlayer++;
             if (currentPlayer == players.size()) currentPlayer = 0;
-
-            return winner;
         }
+        return winner;
     }
 
     public boolean wrongAnswer() {
