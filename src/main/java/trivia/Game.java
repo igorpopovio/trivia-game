@@ -103,10 +103,13 @@ public class Game {
             winner = didPlayerWin();
         }
 
+        advanceToNextPlayer();
+        return winner;
+    }
+
+    public void advanceToNextPlayer() {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
-
-        return winner;
     }
 
     public boolean wrongAnswer() {
@@ -114,8 +117,7 @@ public class Game {
         log("%s was sent to the penalty box", players.get(currentPlayer));
         inPenaltyBox[currentPlayer] = true;
 
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
+        advanceToNextPlayer();
         return true;
     }
 
