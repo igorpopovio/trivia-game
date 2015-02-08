@@ -100,7 +100,7 @@ Sue is getting out of the penalty box
 Sue's new location is 7
 The category is Rock
 Rock Question 2
-Answer was correct!!!!
+Answer was corrent!!!!
 Sue now has 2 Gold Coins.
 Chet is the current player
 They have rolled a 2
@@ -115,15 +115,14 @@ Pat is getting out of the penalty box
 Pat's new location is 6
 The category is Sports
 Sports Question 3
-Answer was correct!!!!
+Answer was corrent!!!!
 Pat now has 5 Gold Coins.
 Sue is the current player
 They have rolled a 3
-Sue is getting out of the penalty box
 Sue's new location is 10
 The category is Sports
 Sports Question 4
-Answer was correct!!!!
+Answer was corrent!!!!
 Sue now has 3 Gold Coins.
 Chet is the current player
 They have rolled a 3
@@ -135,9 +134,8 @@ Question was incorrectly answered
 Chet was sent to the penalty box
 Pat is the current player
 They have rolled a 3
-Pat is getting out of the penalty box
 Pat's new location is 9
 The category is Science
 Science Question 6
-Answer was correct!!!!
+Answer was corrent!!!!
 Pat now has 6 Gold Coins.
