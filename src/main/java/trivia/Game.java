@@ -86,17 +86,7 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        boolean winner;
-        if (inPenaltyBox[currentPlayer]) {
-            if (isGettingOutOfPenaltyBox) {
-                winner = doIfAnswerIsCorrect();
-            } else {
-                winner = true;
-            }
-        } else {
-            winner = doIfAnswerIsCorrect();
-        }
-
+        boolean winner = inPenaltyBox[currentPlayer] ? true : doIfAnswerIsCorrect();
         advanceToNextPlayer();
         return winner;
     }
