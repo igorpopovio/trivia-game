@@ -89,22 +89,23 @@ public class Game {
         boolean winner;
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
-                log("Answer was correct!!!!");
-                purses[currentPlayer]++;
-                log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
-                winner = didPlayerWin();
+                winner = doIfAnswerIsCorrect();
             } else {
                 winner = true;
             }
         } else {
-            log("Answer was correct!!!!");
-            purses[currentPlayer]++;
-            log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
-            winner = didPlayerWin();
+            winner = doIfAnswerIsCorrect();
         }
 
         advanceToNextPlayer();
         return winner;
+    }
+
+    public boolean doIfAnswerIsCorrect() {
+        log("Answer was correct!!!!");
+        purses[currentPlayer]++;
+        log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
+        return didPlayerWin();
     }
 
     public void advanceToNextPlayer() {
