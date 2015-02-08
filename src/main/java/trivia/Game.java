@@ -102,7 +102,7 @@ public class Game {
                 winner = true;
             }
         } else {
-            log("Answer was corrent!!!!");
+            log("Answer was correct!!!!");
             purses[currentPlayer]++;
             log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
 
