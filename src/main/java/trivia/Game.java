@@ -53,8 +53,8 @@ public class Game {
     }
 
     public void play(int roll) {
-        places[currentPlayer] = places[currentPlayer] + roll;
-        if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+        places[currentPlayer] += roll;
+        places[currentPlayer] %= 12;
 
         log("%s's new location is %d", players.get(currentPlayer), places[currentPlayer]);
         log("The category is %s", currentCategory());
