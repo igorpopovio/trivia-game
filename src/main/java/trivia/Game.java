@@ -62,13 +62,13 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (currentCategory() == "Pop")
+        if ("Pop".equals(currentCategory()))
             log(popQuestions.removeFirst());
-        if (currentCategory() == "Science")
+        if ("Science".equals(currentCategory()))
             log(scienceQuestions.removeFirst());
-        if (currentCategory() == "Sports")
+        if ("Sports".equals(currentCategory()))
             log(sportsQuestions.removeFirst());
-        if (currentCategory() == "Rock")
+        if ("Rock".equals(currentCategory()))
             log(rockQuestions.removeFirst());
     }
 
