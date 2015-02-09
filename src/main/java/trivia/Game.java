@@ -88,8 +88,8 @@ public class Game {
     public void wasCorrectlyAnswered() {
         if (inPenaltyBox[currentPlayer]) return;
 
-        log("Answer was correct!!!!");
         purses[currentPlayer]++;
+        log("Answer was correct!!!!");
         log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
     }
 
