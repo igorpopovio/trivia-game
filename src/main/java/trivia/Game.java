@@ -105,7 +105,9 @@ public class Game {
     }
 
     public boolean isOver() {
-        return purses[currentPlayer] == 6;
+        for (int coins : purses)
+            if (coins == 6) return true;
+        return false;
     }
 
     public int getCoinsForCurrentPlayer() {
