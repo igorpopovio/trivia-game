@@ -17,7 +17,7 @@ public class Game {
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
 
-    int currentPlayer;
+    int currentPlayerIndex;
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
@@ -37,26 +37,26 @@ public class Game {
     }
 
     public void roll(int roll) {
-        log("%s is the current player", players.get(currentPlayer));
+        log("%s is the current player", players.get(currentPlayerIndex));
         log("They have rolled a %d", roll);
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (inPenaltyBox[currentPlayerIndex]) {
             isGettingOutOfPenaltyBox = roll % 2 != 0;
-            inPenaltyBox[currentPlayer] = !isGettingOutOfPenaltyBox;
+            inPenaltyBox[currentPlayerIndex] = !isGettingOutOfPenaltyBox;
             if (isGettingOutOfPenaltyBox)
-                log("%s is getting out of the penalty box", players.get(currentPlayer));
+                log("%s is getting out of the penalty box", players.get(currentPlayerIndex));
             else
-                log("%s is not getting out of the penalty box", players.get(currentPlayer));
+                log("%s is not getting out of the penalty box", players.get(currentPlayerIndex));
         }
 
-        if (!inPenaltyBox[currentPlayer]) play(roll);
+        if (!inPenaltyBox[currentPlayerIndex]) play(roll);
     }
 
     public void play(int roll) {
-        places[currentPlayer] += roll;
-        places[currentPlayer] %= 12;
+        places[currentPlayerIndex] += roll;
+        places[currentPlayerIndex] %= 12;
 
-        log("%s's new location is %d", players.get(currentPlayer), places[currentPlayer]);
+        log("%s's new location is %d", players.get(currentPlayerIndex), places[currentPlayerIndex]);
         log("The category is %s", currentCategory());
         askQuestion();
     }
@@ -73,30 +73,30 @@ public class Game {
     }
 
     private String currentCategory() {
-        if (places[currentPlayer] % 4 == 0) return "Pop";
-        if (places[currentPlayer] % 4 == 1) return "Science";
-        if (places[currentPlayer] % 4 == 2) return "Sports";
-        if (places[currentPlayer] % 4 == 3) return "Rock";
+        if (places[currentPlayerIndex] % 4 == 0) return "Pop";
+        if (places[currentPlayerIndex] % 4 == 1) return "Science";
+        if (places[currentPlayerIndex] % 4 == 2) return "Sports";
+        if (places[currentPlayerIndex] % 4 == 3) return "Rock";
         return "";
     }
 
     public void wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer]) return;
+        if (inPenaltyBox[currentPlayerIndex]) return;
 
-        purses[currentPlayer]++;
+        purses[currentPlayerIndex]++;
         log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
+        log("%s now has %d Gold Coins.", players.get(currentPlayerIndex), purses[currentPlayerIndex]);
     }
 
     public void advanceToNextPlayer() {
-        currentPlayer++;
-        currentPlayer %= players.size();
+        currentPlayerIndex++;
+        currentPlayerIndex %= players.size();
     }
 
     public void wrongAnswer() {
         log("Question was incorrectly answered");
-        log("%s was sent to the penalty box", players.get(currentPlayer));
-        inPenaltyBox[currentPlayer] = true;
+        log("%s was sent to the penalty box", players.get(currentPlayerIndex));
+        inPenaltyBox[currentPlayerIndex] = true;
     }
 
     public boolean isOver() {
@@ -106,6 +106,6 @@ public class Game {
     }
 
     public int getCoinsForCurrentPlayer() {
-        return purses[currentPlayer];
+        return purses[currentPlayerIndex];
     }
 }
