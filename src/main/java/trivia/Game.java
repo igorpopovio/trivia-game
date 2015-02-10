@@ -8,8 +8,7 @@ import static trivia.Logger.log;
 
 public class Game {
     List<Player> players = new ArrayList<>();
-
-    boolean[] inPenaltyBox = new boolean[6];
+    PenaltyBox penaltyBox = new PenaltyBox();
 
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
@@ -18,7 +17,6 @@ public class Game {
 
     int currentPlayerIndex;
     Player currentPlayer;
-    boolean isGettingOutOfPenaltyBox;
 
     public Game() {
         for (int i = 0; i < 50; i++) {
@@ -40,17 +38,8 @@ public class Game {
         currentPlayer = players.get(currentPlayerIndex);
         log("%s is the current player", currentPlayer);
         log("They have rolled a %d", roll);
-
-        if (inPenaltyBox[currentPlayerIndex]) {
-            isGettingOutOfPenaltyBox = roll % 2 != 0;
-            inPenaltyBox[currentPlayerIndex] = !isGettingOutOfPenaltyBox;
-            if (isGettingOutOfPenaltyBox)
-                log("%s is getting out of the penalty box", currentPlayer);
-            else
-                log("%s is not getting out of the penalty box", currentPlayer);
-        }
-
-        if (!inPenaltyBox[currentPlayerIndex]) play(roll);
+        penaltyBox.removeBasedOn(currentPlayer, roll);
+        if (!penaltyBox.contains(currentPlayer)) play(roll);
     }
 
     public void play(int roll) {
@@ -82,7 +71,7 @@ public class Game {
     }
 
     public void wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayerIndex]) return;
+        if (penaltyBox.contains(currentPlayer)) return;
 
         currentPlayer.giveCoins(1);
         log("Answer was correct!!!!");
@@ -97,8 +86,7 @@ public class Game {
 
     public void wrongAnswer() {
         log("Question was incorrectly answered");
-        log("%s was sent to the penalty box", currentPlayer);
-        inPenaltyBox[currentPlayerIndex] = true;
+        penaltyBox.add(currentPlayer);
     }
 
     public boolean isOver() {
