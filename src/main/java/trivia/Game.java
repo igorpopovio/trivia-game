@@ -7,9 +7,8 @@ import java.util.List;
 import static trivia.Logger.log;
 
 public class Game {
-    List<String> players = new ArrayList<>();
-    int[] places = new int[6];
-    int[] purses = new int[6];
+    List<Player> players = new ArrayList<>();
+
     boolean[] inPenaltyBox = new boolean[6];
 
     LinkedList popQuestions = new LinkedList();
@@ -18,6 +17,7 @@ public class Game {
     LinkedList rockQuestions = new LinkedList();
 
     int currentPlayerIndex;
+    Player currentPlayer;
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
@@ -30,33 +30,33 @@ public class Game {
     }
 
     public void add(String playerName) {
-        players.add(playerName);
+        players.add(new Player(playerName));
 
         log("%s was added", playerName);
         log("They are player number %d", players.size());
     }
 
     public void roll(int roll) {
-        log("%s is the current player", players.get(currentPlayerIndex));
+        currentPlayer = players.get(currentPlayerIndex);
+        log("%s is the current player", currentPlayer);
         log("They have rolled a %d", roll);
 
         if (inPenaltyBox[currentPlayerIndex]) {
             isGettingOutOfPenaltyBox = roll % 2 != 0;
             inPenaltyBox[currentPlayerIndex] = !isGettingOutOfPenaltyBox;
             if (isGettingOutOfPenaltyBox)
-                log("%s is getting out of the penalty box", players.get(currentPlayerIndex));
+                log("%s is getting out of the penalty box", currentPlayer);
             else
-                log("%s is not getting out of the penalty box", players.get(currentPlayerIndex));
+                log("%s is not getting out of the penalty box", currentPlayer);
         }
 
         if (!inPenaltyBox[currentPlayerIndex]) play(roll);
     }
 
     public void play(int roll) {
-        places[currentPlayerIndex] += roll;
-        places[currentPlayerIndex] %= 12;
+        currentPlayer.updatePlaceBasedOn(roll);
 
-        log("%s's new location is %d", players.get(currentPlayerIndex), places[currentPlayerIndex]);
+        log("%s's new location is %d", currentPlayer, currentPlayer.getPlace());
         log("The category is %s", currentCategory());
         askQuestion();
     }
@@ -73,39 +73,37 @@ public class Game {
     }
 
     private String currentCategory() {
-        if (places[currentPlayerIndex] % 4 == 0) return "Pop";
-        if (places[currentPlayerIndex] % 4 == 1) return "Science";
-        if (places[currentPlayerIndex] % 4 == 2) return "Sports";
-        if (places[currentPlayerIndex] % 4 == 3) return "Rock";
+        int place = currentPlayer.getPlace();
+        if (place % 4 == 0) return "Pop";
+        if (place % 4 == 1) return "Science";
+        if (place % 4 == 2) return "Sports";
+        if (place % 4 == 3) return "Rock";
         return "";
     }
 
     public void wasCorrectlyAnswered() {
         if (inPenaltyBox[currentPlayerIndex]) return;
 
-        purses[currentPlayerIndex]++;
+        currentPlayer.giveCoins(1);
         log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", players.get(currentPlayerIndex), purses[currentPlayerIndex]);
+        log("%s now has %d Gold Coins.", currentPlayer, currentPlayer.getCoins());
     }
 
     public void advanceToNextPlayer() {
         currentPlayerIndex++;
         currentPlayerIndex %= players.size();
+        currentPlayer = players.get(currentPlayerIndex);
     }
 
     public void wrongAnswer() {
         log("Question was incorrectly answered");
-        log("%s was sent to the penalty box", players.get(currentPlayerIndex));
+        log("%s was sent to the penalty box", currentPlayer);
         inPenaltyBox[currentPlayerIndex] = true;
     }
 
     public boolean isOver() {
-        for (int coins : purses)
-            if (coins == 6) return true;
+        for (Player player : players)
+            if (player.getCoins() == 6) return true;
         return false;
-    }
-
-    public int getCoinsForCurrentPlayer() {
-        return purses[currentPlayerIndex];
     }
 }

@@ -20,7 +20,7 @@ public class HappyPathTests {
         game.roll(1);
         game.wasCorrectlyAnswered();
 
-        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(1);
+        assertThat(game.currentPlayer.getCoins()).isEqualTo(1);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class HappyPathTests {
         game.roll(1);
         game.wrongAnswer();
 
-        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
+        assertThat(game.currentPlayer.getCoins()).isEqualTo(0);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class HappyPathTests {
         game.roll(1);
         game.wasCorrectlyAnswered();
 
-        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(1);
+        assertThat(game.currentPlayer.getCoins()).isEqualTo(1);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class HappyPathTests {
         game.roll(2);
         game.wrongAnswer();
 
-        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
+        assertThat(game.currentPlayer.getCoins()).isEqualTo(0);
     }
 
     @Test
@@ -81,11 +81,13 @@ public class HappyPathTests {
         game.roll(2);
         game.wasCorrectlyAnswered();
 
-        assertThat(game.getCoinsForCurrentPlayer()).isEqualTo(0);
+        assertThat(game.currentPlayer.getCoins()).isEqualTo(0);
     }
 
     private void giveCorrectAnswers(int howMany) {
-        for (int i = 1; i <= howMany; i++)
+        for (int i = 1; i <= howMany; i++) {
+            game.roll(1);
             game.wasCorrectlyAnswered();
+        }
     }
 }
