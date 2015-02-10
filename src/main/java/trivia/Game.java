@@ -10,10 +10,10 @@ public class Game {
     List<Player> players = new ArrayList<>();
     PenaltyBox penaltyBox = new PenaltyBox();
 
-    LinkedList popQuestions = new LinkedList();
-    LinkedList scienceQuestions = new LinkedList();
-    LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+    LinkedList<String> popQuestions = new LinkedList<>();
+    LinkedList<String> scienceQuestions = new LinkedList<>();
+    LinkedList<String> sportsQuestions = new LinkedList<>();
+    LinkedList<String> rockQuestions = new LinkedList<>();
 
     int currentPlayerIndex;
     Player currentPlayer;
