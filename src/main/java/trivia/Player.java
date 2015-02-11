@@ -27,6 +27,7 @@ public class Player {
     public void updatePlaceBasedOn(int roll) {
         this.currentPlace += roll;
         this.currentPlace %= 12;
+        log("%s's new location is %d", this, currentPlace);
     }
 
     @Override

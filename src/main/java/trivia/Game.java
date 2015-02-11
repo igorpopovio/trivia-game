@@ -64,13 +64,12 @@ public class Game {
 
     public void play(int roll) {
         currentPlayer.updatePlaceBasedOn(roll);
-
-        log("%s's new location is %d", currentPlayer, currentPlayer.getPlace());
-        log("The category is %s", currentCategory());
         askQuestion();
     }
 
     private void askQuestion() {
+        log("The category is %s", currentCategory());
+
         if ("Pop".equals(currentCategory()))
             log(popQuestions.removeFirst());
         if ("Science".equals(currentCategory()))
