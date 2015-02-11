@@ -3,6 +3,7 @@ package trivia;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import static trivia.Logger.log;
 
@@ -17,6 +18,12 @@ public class Game {
 
     int currentPlayerIndex;
     Player currentPlayer;
+    private Random random;
+
+    public Game(Random random) {
+        this();
+        this.random = random;
+    }
 
     public Game() {
         for (int i = 0; i < 50; i++) {
@@ -32,6 +39,18 @@ public class Game {
 
         log("%s was added", playerName);
         log("They are player number %d", players.size());
+    }
+
+    public void start() {
+        do {
+            roll(random.nextInt(5) + 1);
+            if (random.nextInt(9) == 7)
+                wrongAnswer();
+            else
+                wasCorrectlyAnswered();
+
+            advanceToNextPlayer();
+        } while (!isOver());
     }
 
     public void roll(int roll) {
