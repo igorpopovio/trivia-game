@@ -34,11 +34,12 @@ public class Game {
         }
     }
 
-    public void add(String playerName) {
+    public Game add(String playerName) {
         players.add(new Player(playerName));
 
         log("%s was added", playerName);
         log("They are player number %d", players.size());
+        return this;
     }
 
     public void start() {
