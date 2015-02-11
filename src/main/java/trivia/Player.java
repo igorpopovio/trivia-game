@@ -1,5 +1,7 @@
 package trivia;
 
+import static trivia.Logger.log;
+
 public class Player {
     private String name;
     private int totalCoins;
@@ -11,6 +13,7 @@ public class Player {
 
     public void giveCoins(int coins) {
         totalCoins += coins;
+        log("%s now has %d Gold Coins.", this, totalCoins);
     }
 
     public int getCoins() {
