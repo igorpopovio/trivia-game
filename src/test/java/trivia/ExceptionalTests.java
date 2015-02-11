@@ -19,7 +19,7 @@ public class ExceptionalTests {
         game.roll(7);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = Exception.class)
     public void cannotPlayWhenThereAreNoPlayers() throws Exception {
         new Game().roll(1);
     }

@@ -16,7 +16,7 @@ public class Game {
     LinkedList<String> sportsQuestions = new LinkedList<>();
     LinkedList<String> rockQuestions = new LinkedList<>();
 
-    int currentPlayerIndex;
+    int currentPlayerIndex = -1;
     Player currentPlayer;
     private Random random;
 
@@ -36,6 +36,7 @@ public class Game {
 
     public Game add(String playerName) {
         players.add(new Player(playerName));
+        currentPlayer = players.get(0);
 
         log("%s was added", playerName);
         log("They are player number %d", players.size());
@@ -44,19 +45,14 @@ public class Game {
 
     public void start() {
         do {
-            roll(random.nextInt(5) + 1);
-            if (random.nextInt(9) == 7)
-                wrongAnswer();
-            else
-                wasCorrectlyAnswered();
-
             advanceToNextPlayer();
+            roll(random.nextInt(5) + 1);
+            if (random.nextInt(9) == 7) wrongAnswer();
+            else wasCorrectlyAnswered();
         } while (!isOver());
     }
 
     public void roll(int roll) {
-        currentPlayer = players.get(currentPlayerIndex);
-        log("%s is the current player", currentPlayer);
         log("They have rolled a %d", roll);
         penaltyBox.removeBasedOn(currentPlayer, roll);
         if (!penaltyBox.contains(currentPlayer)) play(roll);
@@ -100,6 +96,7 @@ public class Game {
         currentPlayerIndex++;
         currentPlayerIndex %= players.size();
         currentPlayer = players.get(currentPlayerIndex);
+        log("%s is the current player", currentPlayer);
     }
 
     public void wrongAnswer() {
