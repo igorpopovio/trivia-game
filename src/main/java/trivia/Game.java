@@ -11,10 +11,10 @@ public class Game {
     List<Player> players = new ArrayList<>();
     PenaltyBox penaltyBox = new PenaltyBox();
 
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
+    LinkedList<Question> popQuestions = new LinkedList<>();
+    LinkedList<Question> scienceQuestions = new LinkedList<>();
+    LinkedList<Question> sportsQuestions = new LinkedList<>();
+    LinkedList<Question> rockQuestions = new LinkedList<>();
 
     int currentPlayerIndex = -1;
     Player currentPlayer;
@@ -27,10 +27,10 @@ public class Game {
 
     public Game() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast("Science Question " + i);
-            sportsQuestions.addLast("Sports Question " + i);
-            rockQuestions.addLast("Rock Question " + i);
+            popQuestions.addLast(new Question("Pop", "Pop Question " + i, "Pop Answer " + i));
+            scienceQuestions.addLast(new Question("Science", "Science Question " + i, "Science Answer " + i));
+            sportsQuestions.addLast(new Question("Sports", "Sports Question " + i, "Sports Answer " + i));
+            rockQuestions.addLast(new Question("Rock", "Rock Question " + i, "Rock Answer " + i));
         }
     }
 
@@ -64,15 +64,16 @@ public class Game {
     }
 
     private void askQuestion() {
-        log("The category is %s", currentCategory());
+        String category = currentCategory();
+        log("The category is %s", category);
 
-        if ("Pop".equals(currentCategory()))
+        if ("Pop".equals(category))
             log(popQuestions.removeFirst());
-        if ("Science".equals(currentCategory()))
+        if ("Science".equals(category))
             log(scienceQuestions.removeFirst());
-        if ("Sports".equals(currentCategory()))
+        if ("Sports".equals(category))
             log(sportsQuestions.removeFirst());
-        if ("Rock".equals(currentCategory()))
+        if ("Rock".equals(category))
             log(rockQuestions.removeFirst());
     }
 
