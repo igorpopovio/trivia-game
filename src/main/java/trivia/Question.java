@@ -27,4 +27,8 @@ public class Question {
     public String toString() {
         return question;
     }
+
+    public boolean isCorrectAnswer(String answer) {
+        return correctAnswer.equals(answer);
+    }
 }

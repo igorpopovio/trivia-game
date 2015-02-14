@@ -2,7 +2,7 @@ package trivia;
 
 import static trivia.Logger.log;
 
-public class Player {
+public abstract class Player {
     private String name;
     private int totalCoins;
     private int currentPlace;
@@ -29,6 +29,8 @@ public class Player {
         this.currentPlace %= 12;
         log("%s's new location is %d", this, currentPlace);
     }
+
+    public abstract String answerQuestion(Question question);
 
     @Override
     public String toString() {

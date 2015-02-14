@@ -21,11 +21,7 @@ public class Game {
     private Random random;
 
     public Game(Random random) {
-        this();
         this.random = random;
-    }
-
-    public Game() {
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast(new Question("Pop", "Pop Question " + i, "Pop Answer " + i));
             scienceQuestions.addLast(new Question("Science", "Science Question " + i, "Science Answer " + i));
@@ -35,7 +31,7 @@ public class Game {
     }
 
     public Game add(String playerName) {
-        players.add(new Player(playerName));
+        players.add(new AiPlayer(playerName, random));
         currentPlayer = players.get(0);
 
         log("%s was added", playerName);
@@ -47,8 +43,6 @@ public class Game {
         do {
             advanceToNextPlayer();
             roll(random.nextInt(5) + 1);
-            if (random.nextInt(9) == 7) wrongAnswer();
-            else wasCorrectlyAnswered();
         } while (!isOver());
     }
 
@@ -60,21 +54,26 @@ public class Game {
 
     public void play(int roll) {
         currentPlayer.updatePlaceBasedOn(roll);
-        askQuestion();
+        Question question = askQuestion();
+        log(question);
+
+        String answer = currentPlayer.answerQuestion(question);
+        if (question.isCorrectAnswer(answer))
+            wasCorrectlyAnswered();
+        else
+            wrongAnswer();
     }
 
-    private void askQuestion() {
+    private Question askQuestion() {
         String category = currentCategory();
         log("The category is %s", category);
-
         if ("Pop".equals(category))
-            log(popQuestions.removeFirst());
+            return popQuestions.removeFirst();
         if ("Science".equals(category))
-            log(scienceQuestions.removeFirst());
+            return scienceQuestions.removeFirst();
         if ("Sports".equals(category))
-            log(sportsQuestions.removeFirst());
-        if ("Rock".equals(category))
-            log(rockQuestions.removeFirst());
+            return sportsQuestions.removeFirst();
+        return rockQuestions.removeFirst();
     }
 
     private String currentCategory() {
@@ -82,8 +81,7 @@ public class Game {
         if (place % 4 == 0) return "Pop";
         if (place % 4 == 1) return "Science";
         if (place % 4 == 2) return "Sports";
-        if (place % 4 == 3) return "Rock";
-        return "";
+        return "Rock";
     }
 
     public void wasCorrectlyAnswered() {
