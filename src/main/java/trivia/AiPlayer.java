@@ -12,7 +12,7 @@ public class AiPlayer extends Player {
     }
 
     @Override
-    public String answerQuestion(Question question) {
+    public String answer(Question question) {
         return random.nextInt(9) == 7
                 ? INCORRECT_ANSWER
                 : question.getCorrectAnswer();

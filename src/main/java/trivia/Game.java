@@ -57,8 +57,8 @@ public class Game {
         Question question = askQuestion();
         log(question);
 
-        String answer = currentPlayer.answerQuestion(question);
-        if (question.isCorrectAnswer(answer))
+        String answer = currentPlayer.answer(question);
+        if (question.isCorrect(answer))
             wasCorrectlyAnswered();
         else
             wrongAnswer();

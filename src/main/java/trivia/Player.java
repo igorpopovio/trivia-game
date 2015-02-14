@@ -30,7 +30,7 @@ public abstract class Player {
         log("%s's new location is %d", this, currentPlace);
     }
 
-    public abstract String answerQuestion(Question question);
+    public abstract String answer(Question question);
 
     @Override
     public String toString() {

@@ -28,7 +28,7 @@ public class Question {
         return question;
     }
 
-    public boolean isCorrectAnswer(String answer) {
+    public boolean isCorrect(String answer) {
         return correctAnswer.equals(answer);
     }
 }
