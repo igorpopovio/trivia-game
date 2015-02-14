@@ -43,8 +43,12 @@ public class Game {
     public void start() {
         do {
             switchPlayerTurns();
-            roll(random.nextInt(5) + 1);
+            roll(generateRandomDiceFace());
         } while (!isOver());
+    }
+
+    private int generateRandomDiceFace() {
+        return random.nextInt(5) + 1;
     }
 
     public void roll(int roll) {
