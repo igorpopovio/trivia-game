@@ -2,7 +2,10 @@ package trivia;
 
 import com.google.common.collect.Iterators;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 import static trivia.Logger.log;
 
@@ -53,13 +56,20 @@ public class Game {
         log(question);
 
         String answer = currentPlayer.answer(question);
-        if (question.isCorrect(answer)) {
-            log("Answer was correct!!!!");
-            currentPlayer.giveCoins(1);
-        } else {
-            log("Question was incorrectly answered");
-            penaltyBox.add(currentPlayer);
-        }
+        if (question.isCorrect(answer))
+            rewardPlayer();
+        else
+            punishPlayer();
+    }
+
+    private void punishPlayer() {
+        log("Question was incorrectly answered");
+        penaltyBox.add(currentPlayer);
+    }
+
+    private void rewardPlayer() {
+        log("Answer was correct!!!!");
+        currentPlayer.giveCoins(1);
     }
 
     public void switchPlayerTurns() {
