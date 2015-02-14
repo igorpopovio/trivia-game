@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Board {
     private static final int NUMBER_OF_DUMMY_QUESTIONS = 50;
+    public static final int NUMBER_OF_PLACES = 12;
 
     private HashMap<String, LinkedList<Question>> questions;
     private List<String> categories;

@@ -26,7 +26,7 @@ public abstract class Player {
 
     public void updatePlaceBasedOn(int roll) {
         this.currentPlace += roll;
-        this.currentPlace %= 12;
+        this.currentPlace %= Board.NUMBER_OF_PLACES;
         log("%s's new location is %d", this, currentPlace);
     }
 
