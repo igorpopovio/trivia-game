@@ -1,27 +1,29 @@
 package trivia;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import com.google.common.collect.Iterators;
+
+import java.util.*;
 
 import static trivia.Logger.log;
 
 public class Game {
-    List<Player> players = new ArrayList<>();
-    PenaltyBox penaltyBox = new PenaltyBox();
+    List<Player> players;
+    Iterator<Player> playersIterator;
+    Player currentPlayer;
 
     LinkedList<Question> popQuestions = new LinkedList<>();
     LinkedList<Question> scienceQuestions = new LinkedList<>();
     LinkedList<Question> sportsQuestions = new LinkedList<>();
     LinkedList<Question> rockQuestions = new LinkedList<>();
 
-    int currentPlayerIndex = -1;
-    Player currentPlayer;
-    private Random random;
+    PenaltyBox penaltyBox;
+    Random random;
 
     public Game(Random random) {
         this.random = random;
+        this.penaltyBox = new PenaltyBox();
+        this.players = new ArrayList<>();
+
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast(new Question("Pop", "Pop Question " + i, "Pop Answer " + i));
             scienceQuestions.addLast(new Question("Science", "Science Question " + i, "Science Answer " + i));
@@ -32,7 +34,6 @@ public class Game {
 
     public Game add(String playerName) {
         players.add(new AiPlayer(playerName, random));
-        currentPlayer = players.get(0);
 
         log("%s was added", playerName);
         log("They are player number %d", players.size());
@@ -88,9 +89,10 @@ public class Game {
     }
 
     public void advanceToNextPlayer() {
-        currentPlayerIndex++;
-        currentPlayerIndex %= players.size();
-        currentPlayer = players.get(currentPlayerIndex);
+        if (playersIterator == null)
+            playersIterator = Iterators.cycle(players);
+
+        currentPlayer = playersIterator.next();
         log("%s is the current player", currentPlayer);
     }
 
