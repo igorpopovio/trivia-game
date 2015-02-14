@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
-    private final HashMap<String, LinkedList<Question>> questions;
+    private HashMap<String, LinkedList<Question>> questions;
     private List<String> categories;
 
     public Board() {

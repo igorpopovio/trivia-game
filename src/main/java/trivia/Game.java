@@ -10,13 +10,13 @@ import java.util.Random;
 import static trivia.Logger.log;
 
 public class Game {
-    List<Player> players;
-    Iterator<Player> playersIterator;
-    Player currentPlayer;
+    private List<Player> players;
+    private Iterator<Player> playersIterator;
+    private Player currentPlayer;
 
-    Board board;
-    PenaltyBox penaltyBox;
-    Random random;
+    private Board board;
+    private PenaltyBox penaltyBox;
+    private Random random;
 
     public Game(Random random) {
         this.random = random;
