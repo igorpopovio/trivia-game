@@ -10,6 +10,8 @@ import java.util.Random;
 import static trivia.Logger.log;
 
 public class Game {
+    private static final int COINS_TO_WIN = 6;
+
     private List<Player> players;
     private Iterator<Player> playersIterator;
     private Player currentPlayer;
@@ -82,7 +84,7 @@ public class Game {
 
     public boolean isOver() {
         for (Player player : players)
-            if (player.getCoins() == 6) return true;
+            if (player.getCoins() == COINS_TO_WIN) return true;
         return false;
     }
 }

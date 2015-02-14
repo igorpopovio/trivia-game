@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
+    private static final int NUMBER_OF_DUMMY_QUESTIONS = 50;
+
     private HashMap<String, LinkedList<Question>> questions;
     private List<String> categories;
 
@@ -16,7 +18,7 @@ public class Board {
     }
 
     private void generateDummyQuestions() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < NUMBER_OF_DUMMY_QUESTIONS; i++) {
             addQuestion(generateDummyQuestion("Pop", i));
             addQuestion(generateDummyQuestion("Science", i));
             addQuestion(generateDummyQuestion("Sports", i));
