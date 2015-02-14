@@ -2,6 +2,8 @@ package trivia;
 
 import junitx.framework.FileAssert;
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,6 +14,18 @@ import java.util.Random;
 import static java.lang.String.format;
 
 public class GoldenMasterTests {
+    private PrintStream originalOut;
+
+    @Before
+    public void setUp() {
+        originalOut = System.out;
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(originalOut);
+    }
+
     @Test
     @Ignore("Should be run only when generating the golden master")
     public void generateGoldenMaster() throws Exception {
