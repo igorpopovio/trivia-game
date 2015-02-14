@@ -85,8 +85,6 @@ public class Game {
     }
 
     public void wasCorrectlyAnswered() {
-        if (penaltyBox.contains(currentPlayer)) return;
-
         log("Answer was correct!!!!");
         currentPlayer.giveCoins(1);
     }
