@@ -58,10 +58,13 @@ public class Game {
         log(question);
 
         String answer = currentPlayer.answer(question);
-        if (question.isCorrect(answer))
-            wasCorrectlyAnswered();
-        else
-            wrongAnswer();
+        if (question.isCorrect(answer)) {
+            log("Answer was correct!!!!");
+            currentPlayer.giveCoins(1);
+        } else {
+            log("Question was incorrectly answered");
+            penaltyBox.add(currentPlayer);
+        }
     }
 
     private Question askQuestion() {
@@ -84,21 +87,11 @@ public class Game {
         return "Rock";
     }
 
-    public void wasCorrectlyAnswered() {
-        log("Answer was correct!!!!");
-        currentPlayer.giveCoins(1);
-    }
-
     public void advanceToNextPlayer() {
         currentPlayerIndex++;
         currentPlayerIndex %= players.size();
         currentPlayer = players.get(currentPlayerIndex);
         log("%s is the current player", currentPlayer);
-    }
-
-    public void wrongAnswer() {
-        log("Question was incorrectly answered");
-        penaltyBox.add(currentPlayer);
     }
 
     public boolean isOver() {
