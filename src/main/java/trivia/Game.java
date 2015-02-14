@@ -49,7 +49,7 @@ public class Game {
 
     public void play(int roll) {
         currentPlayer.updatePlaceBasedOn(roll);
-        Question question = board.askQuestion(currentPlayer.getPlace());
+        Question question = board.retrieveQuestionFor(currentPlayer.getPlace());
         log(question);
 
         String answer = currentPlayer.answer(question);

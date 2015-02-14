@@ -1,40 +1,53 @@
 package trivia;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
-
-import static trivia.Logger.log;
+import java.util.List;
 
 public class Board {
-    LinkedList<Question> popQuestions = new LinkedList<>();
-    LinkedList<Question> scienceQuestions = new LinkedList<>();
-    LinkedList<Question> sportsQuestions = new LinkedList<>();
-    LinkedList<Question> rockQuestions = new LinkedList<>();
+    private final HashMap<String, LinkedList<Question>> questions;
+    private List<String> categories;
 
     public Board() {
+        this.questions = new HashMap<>();
+        this.categories = new ArrayList<>();
+        generateDummyQuestions();
+    }
+
+    private void generateDummyQuestions() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(new Question("Pop", "Pop Question " + i, "Pop Answer " + i));
-            scienceQuestions.addLast(new Question("Science", "Science Question " + i, "Science Answer " + i));
-            sportsQuestions.addLast(new Question("Sports", "Sports Question " + i, "Sports Answer " + i));
-            rockQuestions.addLast(new Question("Rock", "Rock Question " + i, "Rock Answer " + i));
+            addQuestion(generateDummyQuestion("Pop", i));
+            addQuestion(generateDummyQuestion("Science", i));
+            addQuestion(generateDummyQuestion("Sports", i));
+            addQuestion(generateDummyQuestion("Rock", i));
         }
     }
 
-    public Question askQuestion(int place) {
-        String category = currentCategory(place);
-        log("The category is %s", category);
-        if ("Pop".equals(category))
-            return popQuestions.removeFirst();
-        if ("Science".equals(category))
-            return scienceQuestions.removeFirst();
-        if ("Sports".equals(category))
-            return sportsQuestions.removeFirst();
-        return rockQuestions.removeFirst();
+    private Question generateDummyQuestion(String category, int number) {
+        return new Question(category, category + " Question " + number, category + " Answer " + number);
     }
 
-    private String currentCategory(int place) {
-        if (place % 4 == 0) return "Pop";
-        if (place % 4 == 1) return "Science";
-        if (place % 4 == 2) return "Sports";
-        return "Rock";
+    private void addQuestion(Question question) {
+        if (!categories.contains(question.getCategory()))
+            categories.add(question.getCategory());
+
+        LinkedList<Question> subQuestions = questions.get(question.getCategory());
+        if (subQuestions == null)
+            subQuestions = new LinkedList<>();
+        subQuestions.add(question);
+        questions.put(question.getCategory(), subQuestions);
+    }
+
+    private Question removeQuestion(String category) {
+        return questions.get(category).removeFirst();
+    }
+
+    public Question retrieveQuestionFor(int place) {
+        return removeQuestion(getCategoryFor(place));
+    }
+
+    private String getCategoryFor(int place) {
+        return categories.get(place % categories.size());
     }
 }

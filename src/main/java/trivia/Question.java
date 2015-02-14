@@ -25,7 +25,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return question;
+        return "The category is " + category + "\n" + question;
     }
 
     public boolean isCorrect(String answer) {
