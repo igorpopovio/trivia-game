@@ -11,11 +11,7 @@ public class Game {
     Iterator<Player> playersIterator;
     Player currentPlayer;
 
-    LinkedList<Question> popQuestions = new LinkedList<>();
-    LinkedList<Question> scienceQuestions = new LinkedList<>();
-    LinkedList<Question> sportsQuestions = new LinkedList<>();
-    LinkedList<Question> rockQuestions = new LinkedList<>();
-
+    Board board;
     PenaltyBox penaltyBox;
     Random random;
 
@@ -23,13 +19,7 @@ public class Game {
         this.random = random;
         this.penaltyBox = new PenaltyBox();
         this.players = new ArrayList<>();
-
-        for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(new Question("Pop", "Pop Question " + i, "Pop Answer " + i));
-            scienceQuestions.addLast(new Question("Science", "Science Question " + i, "Science Answer " + i));
-            sportsQuestions.addLast(new Question("Sports", "Sports Question " + i, "Sports Answer " + i));
-            rockQuestions.addLast(new Question("Rock", "Rock Question " + i, "Rock Answer " + i));
-        }
+        this.board = new Board();
     }
 
     public Game add(String playerName) {
@@ -59,7 +49,7 @@ public class Game {
 
     public void play(int roll) {
         currentPlayer.updatePlaceBasedOn(roll);
-        Question question = askQuestion();
+        Question question = board.askQuestion(currentPlayer.getPlace());
         log(question);
 
         String answer = currentPlayer.answer(question);
@@ -70,26 +60,6 @@ public class Game {
             log("Question was incorrectly answered");
             penaltyBox.add(currentPlayer);
         }
-    }
-
-    private Question askQuestion() {
-        String category = currentCategory();
-        log("The category is %s", category);
-        if ("Pop".equals(category))
-            return popQuestions.removeFirst();
-        if ("Science".equals(category))
-            return scienceQuestions.removeFirst();
-        if ("Sports".equals(category))
-            return sportsQuestions.removeFirst();
-        return rockQuestions.removeFirst();
-    }
-
-    private String currentCategory() {
-        int place = currentPlayer.getPlace();
-        if (place % 4 == 0) return "Pop";
-        if (place % 4 == 1) return "Science";
-        if (place % 4 == 2) return "Sports";
-        return "Rock";
     }
 
     public void switchPlayerTurns() {
