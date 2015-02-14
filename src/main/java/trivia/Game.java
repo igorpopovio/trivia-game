@@ -42,7 +42,7 @@ public class Game {
 
     public void start() {
         do {
-            advanceToNextPlayer();
+            switchPlayerTurns();
             roll(random.nextInt(5) + 1);
         } while (!isOver());
     }
@@ -88,7 +88,7 @@ public class Game {
         return "Rock";
     }
 
-    public void advanceToNextPlayer() {
+    public void switchPlayerTurns() {
         if (playersIterator == null)
             playersIterator = Iterators.cycle(players);
 
